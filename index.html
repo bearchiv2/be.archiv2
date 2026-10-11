@@ -39,93 +39,58 @@
     <!-- Countdown Container -->
     <main class="relative z-10 w-full max-w-sm mx-auto space-y-4">
 
-        <!-- 1. 200 Days Countdown Only -->
-        <a href="anniversary.html" class="block bg-black/45 backdrop-blur-md rounded-3xl p-5 border border-white/20 shadow-2xl transform transition hover:scale-105">
-            <div id="countdown-200" class="grid grid-cols-4 gap-2 text-center">
-                <div class="bg-white/10 rounded-2xl p-2 backdrop-blur-sm">
-                    <span id="d200-days" class="block font-jua text-xl text-white">00</span>
-                    <span class="text-[10px] text-gray-300">일</span>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-2 backdrop-blur-sm">
-                    <span id="d200-hours" class="block font-jua text-xl text-white">00</span>
-                    <span class="text-[10px] text-gray-300">시간</span>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-2 backdrop-blur-sm">
-                    <span id="d200-minutes" class="block font-jua text-xl text-white">00</span>
-                    <span class="text-[10px] text-gray-300">분</span>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-2 backdrop-blur-sm">
-                    <span id="d200-seconds" class="block font-jua text-xl text-white">00</span>
-                    <span class="text-[10px] text-gray-300">초</span>
-                </div>
+        <!-- 1. 200 Days D-Day Only -->
+        <a href="anniversary.html" class="block bg-black/45 backdrop-blur-md rounded-3xl py-6 px-5 border border-white/20 shadow-2xl text-center transform transition hover:scale-105">
+            <div id="dday-200" class="font-jua text-3xl text-white tracking-wider">
+                D-00
             </div>
         </a>
 
-        <!-- 2. Christmas Countdown Only -->
-        <a href="index.html" class="block bg-black/45 backdrop-blur-md rounded-3xl p-5 border border-white/20 shadow-2xl transform transition hover:scale-105">
-            <div id="countdown-xmas" class="grid grid-cols-4 gap-2 text-center">
-                <div class="bg-white/10 rounded-2xl p-2 backdrop-blur-sm">
-                    <span id="dxmas-days" class="block font-jua text-xl text-white">00</span>
-                    <span class="text-[10px] text-gray-300">일</span>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-2 backdrop-blur-sm">
-                    <span id="dxmas-hours" class="block font-jua text-xl text-white">00</span>
-                    <span class="text-[10px] text-gray-300">시간</span>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-2 backdrop-blur-sm">
-                    <span id="dxmas-minutes" class="block font-jua text-xl text-white">00</span>
-                    <span class="text-[10px] text-gray-300">분</span>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-2 backdrop-blur-sm">
-                    <span id="dxmas-seconds" class="block font-jua text-xl text-white">00</span>
-                    <span class="text-[10px] text-gray-300">초</span>
-                </div>
+        <!-- 2. Christmas D-Day Only -->
+        <a href="christmas.html" class="block bg-black/45 backdrop-blur-md rounded-3xl py-6 px-5 border border-white/20 shadow-2xl text-center transform transition hover:scale-105">
+            <div id="dday-xmas" class="font-jua text-3xl text-white tracking-wider">
+                D-00
             </div>
         </a>
+
+        <!-- Instagram Link -->
+        <div class="text-center pt-2">
+            <a href="https://instagram.com/be.archiv2" target="_blank" class="inline-block text-xs font-jua text-gray-300 hover:text-white tracking-widest bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm border border-white/10 transition">
+                @be.archiv2
+            </a>
+        </div>
 
     </main>
 
-    <!-- Dual Countdown Logic -->
+    <!-- D-Day Calculation Logic -->
     <script>
         const target200 = new Date("2026-11-10T00:00:00").getTime();
         const targetXmas = new Date("2026-12-24T19:00:00").getTime();
 
-        function updateCountdowns() {
+        function updateDDays() {
             const now = new Date().getTime();
 
-            // 1. 200 Days Countdown
+            // 1. 200 Days D-Day
             const dist200 = target200 - now;
             if (dist200 < 0) {
-                document.getElementById('countdown-200').innerHTML = '<div class="col-span-4 font-jua text-base text-[#FFD700] py-2">🎉 200일이 되었습니다! 🤎</div>';
+                document.getElementById('dday-200').innerText = "🎉 200일 축하합니다!";
             } else {
-                const d = Math.floor(dist200 / (1000 * 60 * 60 * 24));
-                const h = Math.floor((dist200 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((dist200 % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((dist200 % (1000 * 60)) / 1000);
-                document.getElementById('d200-days').innerText = String(d).padStart(2, '0');
-                document.getElementById('d200-hours').innerText = String(h).padStart(2, '0');
-                document.getElementById('d200-minutes').innerText = String(m).padStart(2, '0');
-                document.getElementById('d200-seconds').innerText = String(s).padStart(2, '0');
+                const days200 = Math.ceil(dist200 / (1000 * 60 * 60 * 24));
+                document.getElementById('dday-200').innerText = `D - ${days200}`;
             }
 
-            // 2. Christmas Countdown
+            // 2. Christmas D-Day
             const distXmas = targetXmas - now;
             if (distXmas < 0) {
-                document.getElementById('countdown-xmas').innerHTML = '<div class="col-span-4 font-jua text-base text-[#FFD700] py-2">🎄 크리스마스 파티 시작! 🎅</div>';
+                document.getElementById('dday-xmas').innerText = "🎄 크리스마스 파티 시작!";
             } else {
-                const d = Math.floor(distXmas / (1000 * 60 * 60 * 24));
-                const h = Math.floor((distXmas % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((distXmas % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((distXmas % (1000 * 60)) / 1000);
-                document.getElementById('dxmas-days').innerText = String(d).padStart(2, '0');
-                document.getElementById('dxmas-hours').innerText = String(h).padStart(2, '0');
-                document.getElementById('dxmas-minutes').innerText = String(m).padStart(2, '0');
-                document.getElementById('dxmas-seconds').innerText = String(s).padStart(2, '0');
+                const daysXmas = Math.ceil(distXmas / (1000 * 60 * 60 * 24));
+                document.getElementById('dday-xmas').innerText = `D - ${daysXmas}`;
             }
         }
 
-        setInterval(updateCountdowns, 1000);
-        updateCountdowns();
+        updateDDays();
+        setInterval(updateDDays, 60000); // update every minute
     </script>
 </body>
 </html>
