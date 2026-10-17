@@ -3,60 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be.ar | Coming Soon</title>
+    <title>Be.ar | Military Classified Archive</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+              publicKey: "rzFdQNuL4_P17UqY1",
+            });
+        })();
+    </script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Jua&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Nanum Gothic', sans-serif;
-            background: linear-gradient(135deg, #f7f2ed 0%, #efe4d8 50%, #f4eee6 100%);
-            color: #2c2c2c;
-            overflow-x: hidden;
+            background-color: #0D1210;
+            color: #E2E8F0;
             min-height: 100vh;
+        }
+        .font-mono-tech {
+            font-family: 'Share Tech Mono', monospace;
         }
         .font-jua {
             font-family: 'Jua', sans-serif;
         }
-        .silk-bg {
-            position: relative;
-            background: linear-gradient(120deg, #fbf7f2 0%, #f0e6da 50%, #f7f3ee 100%);
-            overflow: hidden;
+        .tactical-border {
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.05);
         }
     </style>
 </head>
-<body class="relative min-h-screen flex flex-col justify-between silk-bg py-6 px-4">
+<body class="relative min-h-screen flex flex-col justify-between py-6 px-4">
 
     <!-- Top Page Toggle Navigation -->
-    <header class="max-w-md mx-auto w-full flex justify-center mb-6 z-20">
-        <div class="bg-white/80 backdrop-blur-md p-1.5 rounded-full shadow-lg border border-amber-900/10 flex items-center gap-1 text-xs font-jua">
-            <a href="index.html" class="px-4 py-2 rounded-full text-gray-500 hover:text-gray-800 transition">
-                🏠 티저로
+    <header class="max-w-md mx-auto w-full flex justify-center mb-6 z-30">
+        <div class="bg-black/80 backdrop-blur-md p-1.5 rounded-full shadow-lg border border-emerald-500/20 flex items-center gap-1 text-xs font-mono-tech">
+            <a href="index.html" class="px-4 py-2 rounded-full text-gray-400 hover:text-white transition">
+                [ 티저 ]
             </a>
-            <a href="christmas.html" class="px-4 py-2 rounded-full text-gray-500 hover:text-gray-800 transition">
-                🎄 크리스마스
+            <a href="christmas.html" class="px-4 py-2 rounded-full text-gray-400 hover:text-white transition">
+                [ 크리스마스 ]
             </a>
-            <a href="anniversary.html" class="px-4 py-2 rounded-full bg-[#8D6E63] text-white shadow-sm transition">
-                🧸 200일
+            <a href="anniversary.html" class="px-4 py-2 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/40 font-bold shadow-sm transition">
+                [ 200일 기밀 ]
             </a>
         </div>
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-md mx-auto w-full relative z-10 my-auto text-center">
-        <div class="bg-white/85 backdrop-blur-md rounded-3xl p-10 shadow-xl border border-amber-900/10 text-center space-y-4">
-            <div class="text-5xl mb-2">🤎</div>
-            <h1 class="text-3xl font-jua text-[#5D4037] tracking-wider uppercase">
-                coming soon
-            </h1>
+    <main class="max-w-md mx-auto w-full relative z-10 space-y-6 my-auto pb-12">
+
+        <!-- ================= LOCKED VIEW (Password Gate) ================= -->
+        <div id="view-locked" class="space-y-6">
+            <div class="text-center space-y-2">
+                <div class="inline-block bg-red-950/80 text-red-400 text-xs font-mono-tech px-4 py-1.5 rounded border border-red-800/50 tracking-widest uppercase">
+                    🔒 MILITARY CLEARANCE REQUIRED
+                </div>
+                <h1 class="text-2xl font-mono-tech tracking-wider text-red-500 font-bold">
+                    LEVEL 5 CLASSIFIED
+                </h1>
+                <p class="text-xs text-gray-400 font-mono-tech">
+                    RECORD NO. <span class="text-emerald-400">NO. 200-0110</span>
+                </p>
+            </div>
+
+            <div class="bg-[#121A16] tactical-border rounded-2xl p-6 shadow-2xl space-y-5">
+                <div class="text-xs font-mono-tech text-gray-300 space-y-1 border-b border-white/10 pb-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">SECURITY LEVEL:</span>
+                        <span class="text-red-400">RESTRICTED</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">ACCESS PROTOCOL:</span>
+                        <span class="text-amber-400">PASSWORD AUTHENTICATION</span>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-center">
+                    <p class="text-xs text-gray-300 font-mono-tech">
+                        기밀 열람을 위해 보안 패스코드(6자리)를 입력하세요.
+                    </p>
+                    <form onsubmit="handleUnlock(event)" class="space-y-3">
+                        <input type="password" id="passcode-input" maxlength="6" placeholder="******" 
+                            class="w-full text-center px-4 py-3 rounded-xl bg-black/60 border border-emerald-500/30 text-emerald-400 font-mono-tech text-xl tracking-widest focus:outline-none focus:border-emerald-400">
+                        <div id="error-msg" class="text-xs text-red-400 font-mono-tech hidden">
+                            ⚠️ 보안 패스코드가 일치하지 않습니다.
+                        </div>
+                        <button type="submit" 
+                            class="w-full bg-emerald-900/60 hover:bg-emerald-800 text-emerald-300 border border-emerald-500/50 font-mono-tech py-3 rounded-xl transition font-bold tracking-wider">
+                            ACCESS GRANTED [ ENTER ]
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
+
+        <!-- ================= UNLOCKED VIEW (Declassified) ================= -->
+        <div id="view-unlocked" class="space-y-6 hidden">
+            <!-- Header Stamp -->
+            <div class="text-center space-y-2">
+                <div class="inline-block bg-emerald-950 text-emerald-400 text-xs font-mono-tech px-4 py-1.5 rounded-full border border-emerald-500/40 tracking-wider uppercase">
+                    🔓 DECLASSIFIED — ACCESS GRANTED
+                </div>
+                <h1 class="text-3xl font-jua text-emerald-200 leading-tight">
+                    기밀 해제가 완료되었습니다
+                </h1>
+                <p class="text-xs text-gray-400 font-mono-tech">
+                    보존된 기록물이 지정된 열람자에게 성공적으로 이관되었습니다.
+                </p>
+            </div>
+
+            <!-- Table of Contents -->
+            <section class="bg-[#121A16] tactical-border rounded-3xl p-6 shadow-xl space-y-4">
+                <h2 class="font-mono-tech text-sm text-emerald-400 flex items-center gap-2 border-b border-white/10 pb-3 tracking-widest">
+                    <span>📂</span> ARCHIVE INDEX (목차)
+                </h2>
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5">
+                        <span class="font-bold text-gray-200 font-jua">01. 어린 시절</span>
+                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER I</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5">
+                        <span class="font-bold text-gray-200 font-jua">02. 학창 시절 & 청소년기</span>
+                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER II</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5">
+                        <span class="font-bold text-gray-200 font-jua">03. 성인이 된 이후</span>
+                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER III</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5">
+                        <span class="font-bold text-gray-200 font-jua">04. 현재와 관계에 관한 기록</span>
+                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER IV</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Transfer Message (Customizable via CONFIG) -->
+            <section class="bg-[#121A16] tactical-border rounded-3xl p-6 shadow-lg text-center space-y-3 relative">
+                <h3 id="config-msg-title" class="font-mono-tech text-xs text-amber-400 tracking-widest">[ FINAL TRANSFER MESSAGE ]</h3>
+                <p id="config-msg-desc" class="text-xs leading-relaxed text-gray-300">
+                    모든 기록은 한 사람에 관한 것이었지만,<br>
+                    이 기록을 건네고 싶었던 사람은<br>처음부터 한 명뿐이었습니다.
+                </p>
+                <div class="pt-2">
+                    <span class="text-[10px] text-emerald-400 font-mono-tech">SECURE ARCHIVE BOX TRANSFERRED 🧸🤎</span>
+                </div>
+            </section>
+
+            <!-- Interactive Bridge Form: Christmas Key -->
+            <section class="bg-[#121A16] tactical-border rounded-3xl p-6 shadow-xl space-y-4">
+                <div class="text-center space-y-1 border-b border-white/10 pb-3">
+                    <span class="text-amber-400 text-xs font-mono-tech tracking-widest">🔐 CHRISTMAS KEY BRIDGE</span>
+                    <h3 class="font-jua text-base text-gray-100">크리스마스를 향한 열쇠 남기기</h3>
+                </div>
+
+                <form onsubmit="handleBridgeSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-mono-tech text-gray-400 mb-1">크리스마스에 가장 함께하고 싶은 순간은?</label>
+                        <input type="text" id="bridge-moment" required placeholder="예: 하얀 눈이 내리는 밤의 산책 🎄" 
+                            class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white focus:outline-none focus:border-emerald-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono-tech text-gray-400 mb-1">나에게 남기는 한 줄 메시지</label>
+                        <textarea id="bridge-msg" rows="2" required placeholder="따뜻한 기대평이나 메시지를 남겨주세요 🤎" 
+                            class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-sm text-white focus:outline-none focus:border-emerald-400 resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" 
+                        class="w-full bg-emerald-900/60 hover:bg-emerald-800 text-emerald-300 border border-emerald-500/50 font-mono-tech py-3 rounded-xl transition text-xs font-bold tracking-wider flex items-center justify-center gap-2">
+                        <span>✨</span> 크리스마스 열쇠 전송하기
+                    </button>
+                </form>
+
+                <div id="bridge-success" class="hidden p-3 bg-emerald-950/80 text-emerald-300 rounded-xl text-center text-xs font-jua border border-emerald-500/30">
+                    🎉 열쇠가 성공적으로 전송 및 저장되었습니다!<br>지메일 알림과 크리스마스 페이지에서 확인하실 수 있습니다. 🎄
+                    <div class="mt-2">
+                        <a href="christmas.html" class="inline-block underline text-amber-300 hover:text-white">크리스마스 페이지로 이동하기 →</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
     </main>
 
     <!-- Footer -->
-    <footer class="text-center text-xs text-gray-500 pt-8 pb-4 space-y-1 relative z-10">
+    <footer class="text-center text-xs text-gray-500 py-4 space-y-1 font-mono-tech relative z-10">
         <p class="font-bold">Instagram: @be.archiv2</p>
+        <p>MILITARY CLASSIFIED ARCHIVE © 2026</p>
     </footer>
 
+    <!-- ================================================================= -->
+    <!-- 🛠️ 커스텀 설정 및 보안 해제 로직 -->
+    <!-- ================================================================= -->
+    <script>
+        // 1. 최종 이관 메시지 커스텀 설정
+        const ARCHIVE_CONFIG = {
+            messageTitle: "[ FINAL TRANSFER MESSAGE ]",
+            messageBody: "모든 기록은 한 사람에 관한 것이었지만,<br>이 기록을 건네고 싶었던 사람은<br>처음부터 한 명뿐이었습니다."
+        };
+
+        document.getElementById('config-msg-title').innerText = ARCHIVE_CONFIG.messageTitle;
+        document.getElementById('config-msg-desc').innerHTML = ARCHIVE_CONFIG.messageBody;
+
+        // 2. 비밀번호 보안 해제 로직 (패스코드: 260425)
+        const CORRECT_PASSCODE = "260425";
+
+        function checkUnlockStatus() {
+            const isUnlocked = sessionStorage.getItem('bear_unlocked') === 'true';
+            if (isUnlocked) {
+                document.getElementById('view-locked').classList.add('hidden');
+                document.getElementById('view-unlocked').classList.remove('hidden');
+            } else {
+                document.getElementById('view-locked').classList.remove('hidden');
+                document.getElementById('view-unlocked').classList.add('hidden');
+            }
+        }
+
+        function handleUnlock(event) {
+            event.preventDefault();
+            const inputVal = document.getElementById('passcode-input').value;
+            const errorMsg = document.getElementById('error-msg');
+
+            if (inputVal === CORRECT_PASSCODE) {
+                sessionStorage.setItem('bear_unlocked', 'true');
+                errorMsg.classList.add('hidden');
+                checkUnlockStatus();
+            } else {
+                errorMsg.classList.remove('hidden');
+                document.getElementById('passcode-input').value = "";
+            }
+        }
+
+        // 3. Interactive Bridge Form Handler with EmailJS
+        function handleBridgeSubmit(event) {
+            event.preventDefault();
+            const moment = document.getElementById('bridge-moment').value;
+            const msg = document.getElementById('bridge-msg').value;
+
+            // Save to localStorage for Christmas page bridge (Always works)
+            localStorage.setItem('bear_xmas_moment', moment);
+            localStorage.setItem('bear_xmas_msg', msg);
+
+            // Send email via EmailJS
+            const templateParams = {
+                moment: moment,
+                message: msg
+            };
+
+            emailjs.send('service_2vuq81x', 'template_6s7mirs', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    document.getElementById('bridge-success').classList.remove('hidden');
+                    event.target.reset();
+                }, function(error) {
+                    console.error('EmailJS FAILED:', error);
+                    // Fallback success so user experience isn't blocked, but show error details
+                    document.getElementById('bridge-success').classList.remove('hidden');
+                    event.target.reset();
+                    alert('메시지는 정상 저장되었으나 이메일 발송 중 오류가 발생했습니다. (로컬 file:// 환경에서는 CORS 보안으로 차단될 수 있습니다. 웹 서버 환경에서 테스트해 보세요!)');
+                });
+        }
+
+        checkUnlockStatus();
+    </script>
 </body>
 </html>
