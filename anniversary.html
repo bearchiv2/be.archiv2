@@ -261,10 +261,10 @@
                     event.target.reset();
                 }, function(error) {
                     console.error('EmailJS FAILED:', error);
-                    // Fallback success so user experience isn't blocked, but show error details
+                    // Show exact error details for debugging
+                    alert('EmailJS 오류 발생: ' + (error.text || JSON.stringify(error)));
                     document.getElementById('bridge-success').classList.remove('hidden');
                     event.target.reset();
-                    alert('메시지는 정상 저장되었으나 이메일 발송 중 오류가 발생했습니다. (로컬 file:// 환경에서는 CORS 보안으로 차단될 수 있습니다. 웹 서버 환경에서 테스트해 보세요!)');
                 });
         }
 
