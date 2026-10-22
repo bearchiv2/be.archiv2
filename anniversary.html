@@ -122,18 +122,18 @@
                     <span>📂</span> ARCHIVE INDEX (목차)
                 </h2>
                 <div class="space-y-3 text-sm">
-                    <div class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5">
-                        <span class="font-bold text-gray-200 font-jua">01. 어린 시절</span>
-                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER I</span>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5">
-                        <span class="font-bold text-gray-200 font-jua">02. 학창 시절 & 청소년기</span>
-                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER II</span>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5">
-                        <span class="font-bold text-gray-200 font-jua">03. 성인이 된 이후</span>
-                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER III</span>
-                    </div>
+                    <a href="https://drive.google.com/open?id=12QmzKVIatY5NtIvhwVwy5Olp9cXUxP6W&usp=drive_fs" target="_blank" class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5 hover:border-emerald-500/50 hover:bg-black/60 transition cursor-pointer block">
+                        <span class="font-bold text-gray-200 font-jua flex items-center gap-2">01. 어린 시절 <span class="text-[10px] text-amber-400 font-mono-tech">[ VIEW ]</span></span>
+                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER I ↗</span>
+                    </a>
+                    <a href="https://drive.google.com/open?id=1TS9ohvupPM0ChGIho040a-t10VxxJH5r&usp=drive_fs" target="_blank" class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5 hover:border-emerald-500/50 hover:bg-black/60 transition cursor-pointer block">
+                        <span class="font-bold text-gray-200 font-jua flex items-center gap-2">02. 학창 시절 & 청소년기 <span class="text-[10px] text-amber-400 font-mono-tech">[ VIEW ]</span></span>
+                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER II ↗</span>
+                    </a>
+                    <a href="https://drive.google.com/open?id=1dZw7hAEnXFBHpSvYhrlRg2rKjADYZjHr&usp=drive_fs" target="_blank" class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5 hover:border-emerald-500/50 hover:bg-black/60 transition cursor-pointer block">
+                        <span class="font-bold text-gray-200 font-jua flex items-center gap-2">03. 성인이 된 이후 <span class="text-[10px] text-amber-400 font-mono-tech">[ VIEW ]</span></span>
+                        <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER III ↗</span>
+                    </a>
                     <div class="flex items-center justify-between p-3 bg-black/40 rounded-2xl border border-white/5">
                         <span class="font-bold text-gray-200 font-jua">04. 현재와 관계에 관한 기록</span>
                         <span class="text-xs text-emerald-500 font-mono-tech">CHAPTER IV</span>
@@ -203,7 +203,7 @@
         // 1. 최종 이관 메시지 커스텀 설정
         const ARCHIVE_CONFIG = {
             messageTitle: "[ FINAL TRANSFER MESSAGE ]",
-            messageBody: "a,<br>b<br>c"
+            messageBody: "모든 기록은 한 사람에 관한 것이었지만,<br>이 기록을 건네고 싶었던 사람은<br>처음부터 한 명뿐이었습니다."
         };
 
         document.getElementById('config-msg-title').innerText = ARCHIVE_CONFIG.messageTitle;
@@ -254,7 +254,7 @@
                 message: msg
             };
 
-            emailjs.send('service_2vuq81x', 'template_u6ch6xd', templateParams)
+            emailjs.send('service_2vuq81x', 'template_6s7mirs', templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     document.getElementById('bridge-success').classList.remove('hidden');
