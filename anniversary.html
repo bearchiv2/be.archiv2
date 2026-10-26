@@ -203,7 +203,7 @@
         // 1. 최종 이관 메시지 커스텀 설정
         const ARCHIVE_CONFIG = {
             messageTitle: "[ FINAL TRANSFER MESSAGE ]",
-            messageBody: "모든 기록은 한 사람에 관한 것이었지만,<br>이 기록을 건네고 싶었던 사람은<br>처음부터 한 명뿐이었습니다."
+            messageBody: "나와 함께 잘 지내줘서 고마워요.<br>내 어릴때 이야기를 몇번 물어봐서 이번 기회에 준비해봤어요.<br>마음에 들었으면:)❣️"
         };
 
         document.getElementById('config-msg-title').innerText = ARCHIVE_CONFIG.messageTitle;
@@ -254,7 +254,7 @@
                 message: msg
             };
 
-            emailjs.send('service_2vuq81x', 'template_6s7mirs', templateParams)
+            emailjs.send('service_2vuq81x', 'template_u6ch6xd', templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     document.getElementById('bridge-success').classList.remove('hidden');
